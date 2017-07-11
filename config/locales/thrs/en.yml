@@ -1,0 +1,99 @@
+en:
+  thrs:
+    favs: "Favorites"
+
+    closed:
+      summary: "Question closed by %{user} due to <b>%{reason}</b>"
+
+    subscribe:
+      link: "Subscribe"
+      desc: "You will be notify about changes in this question"
+    unsubscribe:
+      link: "Unsubscribe"
+      desc: "You will not be notify about changes in this question"
+
+    index:
+
+    show:
+      details: "Question details"
+      interesting: "Subscribe"
+      related: "Related questions"
+
+    new:
+      title: "New question"
+      title_ph: "Type question title"
+      content_ph: "Type question content"
+      tagnames_ph: "Field can contain from %{min} to %{max} tags"
+
+    create:
+      saved: "Question published"
+
+    edit:
+      when_title: "When edit question"
+      when_content: "Edit this question only if the text contains inaccurate or false information.
+         You'll find a bug or have additional information on the chosen topic.
+         The question contains the word offensive or insulting someone"
+      tag_content: "Pay attention to the field tags, if they are not precise enough, put there your suggestion.
+      Field can contain from %{min} to %{max} tags."
+      version_and_note_title: "Versioning and note from the editor"
+      version_and_note_content: "All changes in questions and responses can be restored using the select box \"Available versions\".
+         Try to specify others what you have changed filling \"Note from the editor\"."
+    update:
+      saved: "Question saved"
+    destroy:  
+
+  unauthorized:
+    read:
+      thr: "You can't read"
+    create:
+      thr: "You can't create question"
+    update:
+      thr: "You can't edit question"
+    destroy:
+      thr: "You can't delete question"
+    vote:
+      thr: "You can't vote on this question"
+    vote_up:
+      thr: "You can't vote on this question"
+    vote_down:
+      thr: "You can't vote against"
+    fav:
+      thr: "You can't add question to favorites"
+    history:
+      thr: "You can't watch edit history of this answer"
+    report_close:
+      thr: "You can not submit question to close"
+    close:
+      thr: "You can not submit question to close"
+    report_flag:
+      thr: "You can't report question to the moderator"
+    flag:
+      thr: "You can't report question to the moderator"
+
+  activerecord:
+    models:
+      thrs: "Questions"
+      thr: "Question"
+    attributes:
+      thr:
+        title: "Subject"
+        content: "Details"
+        versions: "Available versions"
+        tags: "Tags"
+        tagnames: "Tags"
+        vsummary: "Note from the editor"
+        summary: "Note from the editor"
+
+    errors:
+      models:
+        thr:
+          attributes:
+#            vtags:
+#              min_max_tags: "must contain from %{min} to %{max} tags"
+            tagnames:
+              min_max_tags: "must contain from %{min} to %{max} tags"
+              no_special_tags: "must contain one of special tags (%{arr})"
+
+ 
+
+  

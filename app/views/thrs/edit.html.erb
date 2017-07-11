@@ -1,0 +1,32 @@
+<div class="lcontent">
+  <div class="title">
+    <h2><%= title "#{t(:edit)} #{@thr.stitle}" %></h2>
+  </div>
+  <div class="icontent">
+    <%= render 'form_retag' if can?(:retag, @thr) && cannot?(:edit, @thr) %>
+    <%= render 'form' if can?(:edit, @thr) %>
+  </div>
+</div>
+<div class="rhelper">
+  <% if can?(:edit, @thr) %>
+    <div class="block">
+      <div class="title"><h3><%= t "thrs.edit.when_title" %></h3></div>
+      <div class="bdesc"><%= t "thrs.edit.when_content" %></div>
+    </div>
+  <% end %>
+
+  <% if can?(:retag, @thr) && can?(:edit, @thr) %>
+    <div class="block">
+      <div class="title"><h3><%= t("activerecord.models.tags") %></h3></div>
+      <div class="bdesc"><%= t "thrs.edit.tag_content", :min=> Tag::MIN_TAGS, :max=> Tag::MAX_TAGS %></div>
+    </div>
+  <% end %>
+
+  <% if can?(:edit, @thr) %>
+    <div class="block">
+      <div class="title"><h3><%= t "thrs.edit.version_and_note_title" %></h3></div>
+      <div class="bdesc"><%= t "thrs.edit.version_and_note_content" %></div>
+    </div>
+  <% end %>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,101 @@
+<div class="title">
+  <h2 class="left"><%=raw title(@user.sname) %></h2>
+  <div class="right">
+    <%= render_navigation(:context=>:user_tabs) %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-3">
+    <div id="avatars">
+      <div id="gravatar">
+        <%= image_tag(APP_CONFIG['gravatar_url'] + Digest::MD5.hexdigest(@user.email) + "?d=identicon&s=128") %>
+      </div>
+    </div>
+    <div class="user_reputation"><%= @user.reputation %></div>
+  </div>
+  <div class="col-md-4">
+    <div class="field">
+      <div class="flabel"><%= t('activerecord.attributes.user.name2') %></div>
+      <div class="fdesc"><%=raw @user.sname %></div>
+    </div>
+    <div class="field">
+      <div class="flabel"><%= t('activerecord.attributes.user.created_at') %></div>
+      <div class="fdesc"><%= distance_of_time_in_words_to_now(@user.created_at) %></div>
+    </div>
+    <div class="field">
+      <div class="flabel"><%= t('activerecord.attributes.user.last_login') %></div>
+      <div class="fdesc"><%= distance_of_time_in_words_to_now(@user.last_login) %></div>
+    </div>
+    <div class="field">
+      <div class="flabel"><%= t('activerecord.attributes.user.age') %></div>
+      <div class="fdesc"><%= "#{(Time.now.year - @user.birth.year)} lat" if @user.birth %></div>
+    </div>
+    <div class="field">
+      <div class="flabel">www:</div>
+      <div class="fdesc"><%= @user.www %></div>
+    </div>
+  </div>
+  <div class="col-md-5">
+      <div style="min-height:250px;background-color:#ddd;padding:5px;">
+        <% if @user.about %>
+          <%=raw @user.about.gsub(/\n/, '<br/>') %>
+        <% else %>
+          (<%=raw @user.sname %>`s bio is blank)
+        <% end %>
+      </div>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-8">
+    <div class="title">
+      <h2 class="summary"><em><%= @user.thrs.count %></em><%= t "users.show.questions" %></h2>
+    </div>
+    <div class="content small" id="thrs">
+      <% @thrs = @user.thrs %>
+      <%= render 'thrs/list' %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="title">
+      <h2 class="summary"><em><%= @user.ans.count %></em><%= t "users.show.answers" %></h2>
+    </div>
+    <div class="content" id="ans">
+      <% @user.ans.each do |an| %>
+        <div class="an">
+          <h3>
+            <%= link_to raw("<span class=\"an_votes #{"resolved" if an.resolved?}\">#{an.vote_count}</span>"),an.thr %>
+            <%= link_to an.thr.stitle,an.thr %>
+          </h3>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row show-grid">
+  <div class="col-md-6">
+    <div class="title">
+      <h2 class="summary"><em><%= @user.votes.count %></em><%= t "users.show.votes" %></h2>
+    </div>
+    Up votes: <%= @user.votes_up.count %>
+    Down votes: <%= @user.votes_down.count %>
+  </div>
+  <div class="col-md-6">
+    <div class="title">
+      <h2 class="summary"><em><%= @user.tags.count %></em><%= t "users.show.tags" %></h2>
+    </div>
+    <div class="tags">
+      <% @user.tags.each do |tag| %>
+        <%= tag_schema tag.name,tag.quantity %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="title">
+  <h2 class="summary"><em><%= @user.badges.count %></em><%= t "users.show.achievements" %></h2>
+</div>
+<div class="achievements">
+<% @user.badges.each do |badge| %>
+  <%= achievement_schema(badge) %>
+<% end %>
+</div>

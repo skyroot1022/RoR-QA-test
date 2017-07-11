@@ -1,0 +1,33 @@
+<div class="title">
+  <h2 class="left"><%=raw @user.sname %></h2>
+  <div class="right">
+    <%= render_navigation(:context=>:user_tabs) %>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="summary">
+  <em><%= @user.activities.public_activities.count %></em>
+  <%=t 'sort.user_tabs.activity' %>
+</div>
+<div id="content">
+  <table>
+    <% @user.activities.public_activities.order("created_at desc").each do |activity| %>
+      <tr>
+        <td><h2 class="grey_font"><%= distance_of_time_in_words_to_now(activity.created_at) %></h2></td>
+        <td><%= activity.name_humanized %></td>
+        <td>
+            <% if activity.activityable_type == 'Thr' %>
+              <strong><%= link_to activity.activityable.stitle, thr_url(activity.activityable.id) %></strong>
+            <% elsif activity.activityable_type == 'An' %>
+              <strong><%= link_to activity.activityable.thr.stitle, thr_url(activity.activityable.thr.id,:anchor=> 'an-'+activity.activityable.id.to_s) %></strong>
+            <% elsif activity.activityable_type == 'Comment' %>
+              <strong><%= activity.activityable.content %></strong>
+            <% elsif activity.achievement %>
+              <%= achievement_schema(activity.achievement.badge) %>
+              <% activity.activityable.stitle if activity.activityable %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
